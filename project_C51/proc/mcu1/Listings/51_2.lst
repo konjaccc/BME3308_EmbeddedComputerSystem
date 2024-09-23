@@ -1,0 +1,231 @@
+A51 MACRO ASSEMBLER  51_2                                                                 04/26/2024 18:47:54 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\51_2.obj
+ASSEMBLER INVOKED BY: E:\S.W\Keil_v5\C51\BIN\A51.EXE 51_2.a51 SET(SMALL) DEBUG PRINT(.\Listings\51_2.lst) OBJECT(.\Objec
+                      ts\51_2.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;RECEPT
+0000                   2     ORG 0000H
+0000 021000            3             LJMP MAIN
+0023                   4     ORG 0023H
+0023 021030            5             LJMP INTR
+1000                   6     ORG 1000H
+1000                   7     MAIN:
+1000 D2AF              8             SETB EA
+1002 758920            9             MOV TMOD, #20H                  ;SET T1
+1005 758BFD           10             MOV TL1, #0FDH
+1008 758DFD           11             MOV TH1, #0FDH
+100B D28E             12             SETB TR1                        ;OPEN T1
+100D D2AC             13             SETB ES
+100F 758700           14             MOV  PCON,#00H       ;SET UART
+1012 759850           15         MOV  SCON,#50H
+1015                  16             LOOOP:
+1015 75A002           17                     MOV  P2,#00000010B;????2?
+1018 8A90             18                     MOV  P1,R2;???1??
+101A 7590FF           19                     MOV  P1,#11111111B;??
+                      20             
+101D 75A004           21                     MOV  P2,#00000100B;????3?
+1020 8B90             22                     MOV  P1,R3;???3??
+1022 7590FF           23                     MOV  P1,#11111111B;??
+1025 75A008           24                     MOV  P2,#00001000B;????4?
+1028 8C90             25                     MOV  P1,R4;???4??
+102A 7590FF           26                     MOV  P1,#11111111B;??
+102D 021015           27             LJMP LOOOP
+                      28     
+1030                  29     INTR:
+1030 20990C           30             JB TI,INT_OVER          ;RI INTERUPT
+1033 C298             31             CLR RI
+1035 E599             32             MOV A,SBUF
+1037 75F002           33             mov b,#2
+103A 84               34             div ab
+103B FF               35             MOV R7, A
+103C 121040           36             LCALL SCREEN
+103F                  37             INT_OVER:
+103F 32               38             RETI
+                      39     
+                      40             
+1040                  41     SCREEN:
+1040                  42                     LOOP: 
+                      43                     
+1040 EF               44     MOV A, R7
+1041 75F00A           45     MOV  B,#10;?????????
+1044 84               46                  DIV  AB
+1045 85F090           47                  MOV 90H,B
+1048 75F00A           48                  MOV  B,#10;
+104B 84               49                  DIV  AB;
+104C 85F091           50                  MOV 91H,B
+104F 75F00A           51                  MOV  B,#10;
+1052 84               52                  DIV  AB;
+1053 E5F0             53                  MOV  A,B;???????????(???)
+1055 B40004           54     N30:      CJNE A,#0,N31;????:?????#0,??????????????????
+1058 7AC0             55                  MOV  R2,#11000000B;0
+105A 803A             56                  JMP  N20
+105C B40104           57     N31:      CJNE A,#1,N32;
+A51 MACRO ASSEMBLER  51_2                                                                 04/26/2024 18:47:54 PAGE     2
+
+105F 7ACF             58                  MOV  R2,#11001111B;1
+1061 8033             59                  JMP  N20
+1063 B40204           60     N32:     CJNE A,#2,N33;
+1066 7AA4             61                 MOV  R2,#10100100B;
+1068 802C             62                 JMP  N20
+106A B40304           63     N33:     CJNE A,#3,N34;
+106D 7AB0             64                 MOV  R2,#10110000B;3
+106F 8025             65                 JMP  N20
+1071 B40404           66     N34:     CJNE A,#4,N35;
+1074 7A99             67                 MOV  R2,#10011001B;4
+1076 801E             68                 JMP  N20
+1078 B40504           69     N35:     CJNE A,#5,N36;
+107B 7A92             70                 MOV  R2,#10010010B;5
+107D 8017             71                 JMP  N20
+107F B40604           72     N36:     CJNE A,#6,N37;
+1082 7A82             73                 MOV  R2,#10000010B;6
+1084 8010             74                 JMP  N20
+1086 B40704           75     N37:     CJNE A,#7,N38;
+1089 7AF8             76                 MOV  R2,#11111000B;7
+108B 8009             77                 JMP  N20
+108D B40804           78     N38:     CJNE A,#8,N39;
+1090 7A80             79                 MOV  R2,#10000000B;8
+1092 8002             80                 JMP  N20
+1094 7A90             81     N39:     MOV  R2,#10010000B;9
+                      82     
+1096                  83     N20:     
+                      84     
+1096 8591F0           85     MOV B,91H
+1099 E5F0             86                 MOV  A,B
+109B B40004           87                 CJNE A,#0,N21;
+109E 7B40             88                 MOV  R3,#01000000B;0
+10A0 803A             89                 JMP  N10
+10A2 B40104           90     N21:     CJNE A,#1,N22;
+10A5 7B4F             91                 MOV  R3,#01001111B;1
+10A7 8033             92                 JMP  N10
+10A9 B40204           93     N22:     CJNE A,#2,N23;
+10AC 7B24             94                 MOV  R3,#00100100B;2
+10AE 802C             95                 JMP  N10
+10B0 B40304           96     N23:     CJNE A,#3,N24;
+10B3 7B30             97                 MOV  R3,#00110000B;3
+10B5 8025             98                 JMP  N10
+10B7 B40404           99     N24:     CJNE A,#4,N25;
+10BA 7B19            100                 MOV  R3,#00011001B;4
+10BC 801E            101                 JMP  N10
+10BE B40504          102     N25:     CJNE A,#5,N26;
+10C1 7B12            103                 MOV  R3,#00010010B;5
+10C3 8017            104                 JMP  N10
+10C5 B40604          105     N26:     CJNE A,#6,N27;
+10C8 7B02            106                 MOV  R3,#00000010B;6
+10CA 8010            107                 JMP  N10
+10CC B40704          108     N27:     CJNE A,#7,N28;
+10CF 7B78            109                 MOV  R3,#01111000B;7
+10D1 8009            110                 JMP  N10
+10D3 B40804          111     N28:     CJNE A,#8,N29;
+10D6 7B00            112                 MOV  R3,#00000000B;8
+10D8 8002            113                 JMP  N10
+10DA 7B10            114     N29:     MOV  R3,#00010000B;9
+                     115     
+10DC 8590F0          116     N10:     MOV B,90H
+10DF E5F0            117                 MOV  A,B
+10E1 B40004          118                 CJNE A,#0,N11;
+10E4 7CC0            119                 MOV  R4,#11000000B;0
+10E6 803A            120                 JMP  SOVER
+10E8 B40104          121     N11:     CJNE A,#1,N12;
+10EB 7CCF            122                 MOV  R4,#11001111B;1
+10ED 8033            123                 JMP  SOVER
+A51 MACRO ASSEMBLER  51_2                                                                 04/26/2024 18:47:54 PAGE     3
+
+10EF B40204          124     N12:     CJNE A,#2,N13;
+10F2 7CA4            125                 MOV  R4,#10100100B;2
+10F4 802C            126                 JMP  SOVER
+10F6 B40304          127     N13:     CJNE A,#3,N14;
+10F9 7CB0            128                 MOV  R4,#10110000B;3
+10FB 8025            129                 JMP  SOVER
+10FD B40404          130     N14:     CJNE A,#4,N15;
+1100 7C99            131                 MOV  R4,#10011001B;4
+1102 801E            132                 JMP  SOVER
+1104 B40504          133     N15:     CJNE A,#5,N16;
+1107 7C92            134                 MOV  R4,#10010010B;5
+1109 8017            135                 JMP  SOVER
+110B B40604          136     N16:     CJNE A,#6,N17;
+110E 7C82            137                 MOV  R4,#10000010B;6
+1110 8010            138                 JMP  SOVER
+1112 B40704          139     N17:     CJNE A,#7,N18;
+1115 7CF8            140                 MOV  R4,#11111000B;7
+1117 8009            141                 JMP  SOVER
+1119 B40804          142     N18:     CJNE A,#8,N19;
+111C 7C80            143                 MOV  R4,#10000000B;8
+111E 8002            144                 JMP  SOVER
+1120 7C90            145     N19:     MOV  R4,#10010000B;9
+1122                 146     SOVER:          
+                     147     
+1122 22              148                     RET
+                     149     
+                     150     
+                     151     END
+                                     
+A51 MACRO ASSEMBLER  51_2                                                                 04/26/2024 18:47:54 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ES . . . . . . . .  B ADDR   00A8H.4 A   
+INTR . . . . . . .  C ADDR   1030H   A   
+INT_OVER . . . . .  C ADDR   103FH   A   
+LOOOP. . . . . . .  C ADDR   1015H   A   
+LOOP . . . . . . .  C ADDR   1040H   A   
+MAIN . . . . . . .  C ADDR   1000H   A   
+N10. . . . . . . .  C ADDR   10DCH   A   
+N11. . . . . . . .  C ADDR   10E8H   A   
+N12. . . . . . . .  C ADDR   10EFH   A   
+N13. . . . . . . .  C ADDR   10F6H   A   
+N14. . . . . . . .  C ADDR   10FDH   A   
+N15. . . . . . . .  C ADDR   1104H   A   
+N16. . . . . . . .  C ADDR   110BH   A   
+N17. . . . . . . .  C ADDR   1112H   A   
+N18. . . . . . . .  C ADDR   1119H   A   
+N19. . . . . . . .  C ADDR   1120H   A   
+N20. . . . . . . .  C ADDR   1096H   A   
+N21. . . . . . . .  C ADDR   10A2H   A   
+N22. . . . . . . .  C ADDR   10A9H   A   
+N23. . . . . . . .  C ADDR   10B0H   A   
+N24. . . . . . . .  C ADDR   10B7H   A   
+N25. . . . . . . .  C ADDR   10BEH   A   
+N26. . . . . . . .  C ADDR   10C5H   A   
+N27. . . . . . . .  C ADDR   10CCH   A   
+N28. . . . . . . .  C ADDR   10D3H   A   
+N29. . . . . . . .  C ADDR   10DAH   A   
+N30. . . . . . . .  C ADDR   1055H   A   
+N31. . . . . . . .  C ADDR   105CH   A   
+N32. . . . . . . .  C ADDR   1063H   A   
+N33. . . . . . . .  C ADDR   106AH   A   
+N34. . . . . . . .  C ADDR   1071H   A   
+N35. . . . . . . .  C ADDR   1078H   A   
+N36. . . . . . . .  C ADDR   107FH   A   
+N37. . . . . . . .  C ADDR   1086H   A   
+N38. . . . . . . .  C ADDR   108DH   A   
+N39. . . . . . . .  C ADDR   1094H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SCREEN . . . . . .  C ADDR   1040H   A   
+SOVER. . . . . . .  C ADDR   1122H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

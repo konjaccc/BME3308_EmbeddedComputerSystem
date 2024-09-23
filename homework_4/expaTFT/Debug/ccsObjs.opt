@@ -1,0 +1,1 @@
+"./Img2Lcd/Img2Lcd/1.obj" "./main.obj" "./dr_tft2.obj" "./dr_tft.obj" -l"libc.a" "../lnk_msp430f6638.cmd" 

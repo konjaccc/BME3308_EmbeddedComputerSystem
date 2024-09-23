@@ -1,0 +1,180 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    04/13/2024  13:21:26  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+E:\S.W\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\homework7_1_trans.obj TO .\Objects\homework7_1 PRINT (.
+>> \Listings\homework7_1.m51)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\STARTUP.obj (?C_STARTUP)
+  .\Objects\homework7_1_trans.obj (HOMEWORK7_1_TRANS)
+
+
+LINK MAP OF MODULE:  .\Objects\homework7_1 (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+* OVERLAP * CODE    0000H     1083H     ABSOLUTE     
+            CODE    1083H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+UNRESOLVED EXTERNAL SYMBOLS:
+   ?C_START
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\homework7_1 (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:1083H         SEGMENT       ?C_C51STARTUP
+  I:0008H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:1086H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:1083H         SYMBOL        STARTUP1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/13/2024  13:21:26  PAGE 2
+
+
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:1083H         LINE#         133
+  C:1085H         LINE#         134
+  C:1086H         LINE#         135
+  C:1087H         LINE#         136
+  C:1089H         LINE#         185
+  C:108CH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        HOMEWORK7_1_TRANS
+  B:00A8H.7       SYMBOL        EA
+  B:00A8H.4       SYMBOL        ES
+  C:1000H         SYMBOL        MAIN
+  C:104BH         SYMBOL        NUM0
+  C:104FH         SYMBOL        NUM1
+  C:1053H         SYMBOL        NUM2
+  C:1057H         SYMBOL        NUM3
+  C:105BH         SYMBOL        NUM4
+  C:105FH         SYMBOL        NUM5
+  C:1063H         SYMBOL        NUM6
+  C:1067H         SYMBOL        NUM7
+  C:106BH         SYMBOL        NUM8
+  C:106FH         SYMBOL        NUM9
+  D:0080H         SYMBOL        P0
+  D:0090H         SYMBOL        P1
+  D:00A0H         SYMBOL        P2
+  D:0087H         SYMBOL        PCON
+  C:1018H         SYMBOL        READ
+  D:0099H         SYMBOL        SBUF
+  D:0098H         SYMBOL        SCON
+  C:1073H         SYMBOL        SEND
+  D:0088H         SYMBOL        TCON
+  D:008DH         SYMBOL        TH1
+  B:0098H.1       SYMBOL        TI
+  D:008BH         SYMBOL        TL1
+  B:0088H.6       SYMBOL        TR1
+  C:0000H         LINE#         2
+  C:1000H         LINE#         5
+  C:1002H         LINE#         6
+  C:1005H         LINE#         7
+  C:1008H         LINE#         8
+  C:100BH         LINE#         9
+  C:100DH         LINE#         10
+  C:100FH         LINE#         11
+  C:1012H         LINE#         12
+  C:1015H         LINE#         13
+  C:1018H         LINE#         16
+  C:101BH         LINE#         17
+  C:101DH         LINE#         18
+  C:1020H         LINE#         19
+  C:1023H         LINE#         20
+  C:1026H         LINE#         21
+  C:1028H         LINE#         22
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/13/2024  13:21:26  PAGE 3
+
+
+  C:102AH         LINE#         23
+  C:102DH         LINE#         24
+  C:1030H         LINE#         25
+  C:1033H         LINE#         26
+  C:1035H         LINE#         27
+  C:1037H         LINE#         28
+  C:103AH         LINE#         29
+  C:103DH         LINE#         30
+  C:1040H         LINE#         31
+  C:1042H         LINE#         32
+  C:1044H         LINE#         33
+  C:1047H         LINE#         34
+  C:1049H         LINE#         35
+  C:104BH         LINE#         37
+  C:104DH         LINE#         38
+  C:104FH         LINE#         40
+  C:1051H         LINE#         41
+  C:1053H         LINE#         43
+  C:1055H         LINE#         44
+  C:1057H         LINE#         46
+  C:1059H         LINE#         47
+  C:105BH         LINE#         49
+  C:105DH         LINE#         50
+  C:105FH         LINE#         52
+  C:1061H         LINE#         53
+  C:1063H         LINE#         55
+  C:1065H         LINE#         56
+  C:1067H         LINE#         58
+  C:1069H         LINE#         59
+  C:106BH         LINE#         61
+  C:106DH         LINE#         62
+  C:106FH         LINE#         64
+  C:1071H         LINE#         65
+  C:1073H         LINE#         68
+  C:1076H         LINE#         69
+  C:1078H         LINE#         71
+  C:107BH         LINE#         72
+  C:107DH         LINE#         73
+  C:1080H         LINE#         74
+  -------         ENDMOD        HOMEWORK7_1_TRANS
+
+*** WARNING L5: CODE SPACE MEMORY OVERLAP
+    FROM:    0000H
+    TO:      0002H
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  ?C_START
+    MODULE:  .\Objects\STARTUP.obj (?C_STARTUP)
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  ?C_START
+    MODULE:  .\Objects\STARTUP.obj (?C_STARTUP)
+    ADDRESS: 108DH
+
+Program Size: data=9.0 xdata=0 code=4242
+LINK/LOCATE RUN COMPLETE.  3 WARNING(S),  0 ERROR(S)

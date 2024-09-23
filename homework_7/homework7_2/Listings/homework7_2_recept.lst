@@ -1,0 +1,85 @@
+A51 MACRO ASSEMBLER  HOMEWORK7_2_RECEPT                                                   04/13/2024 19:54:25 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\homework7_2_recept.obj
+ASSEMBLER INVOKED BY: E:\S.W\Keil_v5\C51\BIN\A51.EXE homework7_2_recept.a51 SET(SMALL) DEBUG PRINT(.\Listings\homework7_
+                      2_recept.lst) OBJECT(.\Objects\homework7_2_recept.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 021000            2             LJMP START
+1000                   3     ORG 1000H
+1000 C2AF              4     START:CLR   EA
+1002 758920            5                MOV  TMOD,#20H
+1005 758DF4            6                MOV  TH1,#0F4H
+1008 758BF4            7                MOV  TL1,#0F4H
+100B 758700            8                MOV  PCON,#00H
+100E D28E              9                SETB  TR1
+1010 759850           10                MOV  SCON,#50H     ;??????1,?????
+1013 3098FD           11       BLOOP1:JNB  RI,$            ;??1??????? 
+1016 C298             12                CLR  RI               
+1018 E599             13                MOV  A,SBUF        ;??1????   
+101A 64E1             14                XRL  A,#0E1H         ;????1??????
+101C 70F5             15                JNZ   BLOOP1          ;??1??????,???   
+101E 7599E2           16                MOV  SBUF,#0E2H     ;?1??????,?????
+1021 3099FD           17                JNB   TI,$       
+1024 C299             18                CLR   TI  
+1026 7840             19                MOV  R0,#40H        ;???????????
+1028 7F10             20                MOV  R7,#10H        ;?????????
+102A 7E00             21                MOV  R6,#00H        ;??????
+102C 3098FD           22     BLOOP2:JNB  RI,$
+102F C298             23                CLR   RI  
+1031 E599             24                MOV  A,SBUF
+1033 F6               25                MOV  @R0,A          ;??????
+1034 08               26                INC   R0  
+1035 2E               27                ADD  A,R6           ;???? 
+1036 FE               28                MOV  R6,A
+1037 DFF3             29                DJNZ  R7,BLOOP2    ;??????????
+                      30     
+1039 3098FD           31                JNB  RI,$             ;??,??1????????
+                      32                                                
+103C C298             33                                                CLR  RI
+103E E599             34                MOV  A,SBUF
+                      35     
+1040 6E               36                XRL  A,R6            ;?????
+                      37     
+1041 6008             38                JZ   END1             ;?????,???????
+                      39     
+1043 7599FF           40                MOV  SBUF,#0FFH    ;??????,?????  
+1046 3099FD           41                JNB  TI,$             ;?????
+1049 C299             42                CLR  TI
+104B 759900           43     END1:MOV  SBUF,#00H
+104E 3099FD           44                JNB  TI,$             ;?????
+1051 C299             45                CLR  TI      
+1053 80FE             46     SJMP $
+                      47     END
+A51 MACRO ASSEMBLER  HOMEWORK7_2_RECEPT                                                   04/13/2024 19:54:25 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BLOOP1 . . . . . .  C ADDR   1013H   A   
+BLOOP2 . . . . . .  C ADDR   102CH   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+END1 . . . . . . .  C ADDR   104BH   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+START. . . . . . .  C ADDR   1000H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\homework7_2_trans.obj" 
+TO ".\Objects\homework7_2_trans" 
+PRINT(".\Listings\homework7_2_trans.m51")

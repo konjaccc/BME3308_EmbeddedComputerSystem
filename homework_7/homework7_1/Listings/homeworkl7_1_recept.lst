@@ -1,0 +1,66 @@
+A51 MACRO ASSEMBLER  HOMEWORKL7_1_RECEPT                                                  04/13/2024 14:02:20 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\homeworkl7_1_recept.obj
+ASSEMBLER INVOKED BY: E:\S.W\Keil_v5\C51\BIN\A51.EXE homeworkl7_1_recept.a51 SET(SMALL) DEBUG PRINT(.\Listings\homeworkl
+                      7_1_recept.lst) OBJECT(.\Objects\homeworkl7_1_recept.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 021000            2             LJMP MAIN
+0023                   3     ORG 0023H
+0023 02101A            4             LJMP RINT
+1000                   5     ORG 1000H
+1000                   6     MAIN:
+1000 D2AF              7             SETB EA
+1002 758820            8             MOV TCON, #20H
+1005 758BFA            9             MOV TL1, #0FAH
+1008 758DFA           10             MOV TH1, #0FAH
+100B D28E             11             SETB TR1
+100D D2AC             12             SETB ES
+100F 758700           13             MOV  PCON,#00H       ;SET UART
+1012 759850           14         MOV  SCON,#50H
+1015 759000           15             MOV P1,#00H
+1018 80FE             16             SJMP $
+101A                  17     RINT:
+101A 75900F           18             MOV P1,#0FH     
+101D 209906           19             JB TI,INT_OVER
+1020 C298             20             CLR RI
+1022 E599             21             MOV A,SBUF
+1024 F580             22             MOV  P0,A
+1026                  23             INT_OVER:
+1026 32               24             RETI
+                      25     END
+                                             
+A51 MACRO ASSEMBLER  HOMEWORKL7_1_RECEPT                                                  04/13/2024 14:02:20 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ES . . . . . . . .  B ADDR   00A8H.4 A   
+INT_OVER . . . . .  C ADDR   1026H   A   
+MAIN . . . . . . .  C ADDR   1000H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+RINT . . . . . . .  C ADDR   101AH   A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+TCON . . . . . . .  D ADDR   0088H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

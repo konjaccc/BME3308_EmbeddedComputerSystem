@@ -1,0 +1,83 @@
+A51 MACRO ASSEMBLER  HOMEWORK7_2_TRANS                                                    04/13/2024 19:54:12 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\homework7_2_trans.obj
+ASSEMBLER INVOKED BY: E:\S.W\Keil_v5\C51\BIN\A51.EXE homework7_2_trans.a51 SET(SMALL) DEBUG PRINT(.\Listings\homework7_2
+                      _trans.lst) OBJECT(.\Objects\homework7_2_trans.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 020100            2             LJMP START
+0100                   3     ORG 0100H
+0100 C2AF              4     START:CLR  EA
+0102 758920            5                MOV  TMOD,#20H     ;???1????2
+0105 758DF4            6                MOV  TH1,#0F4H      ;???????,???2400 
+0108 758BF4            7                MOV  TL1,#0F4H
+010B 758700            8                MOV  PCON,#00H       
+010E D28E              9                SETB  TR1                  ;?????
+0110 759000           10                        MOV P1,#00H
+0113 759850           11                MOV  SCON,#50H     ;??????1,?????????
+0116 7599E1           12       ALOOP1:MOV  SBUF,#0E1H    ;?????
+0119 3099FD           13                JNB  TI,$                  ;????????
+011C C299             14                CLR  TI                       ;?????
+011E 3098FD           15                JNB  RI,$                  ;??2???????            
+0121 C298             16                CLR  RI                      ;?????
+0123 E599             17                MOV  A,SBUF          ;2?????,??A
+0125 64E2             18                XRL  A,#0E2H          ;??2????????  
+0127 70ED             19                JNZ  ALOOP1             ;2??????,????  
+                      20     
+0129 7840             21       ALOOP2:MOV  R0,#40H        ;2?????,???????????
+012B 7F10             22                MOV  R7,#10H         ;?????????
+012D 7E00             23                MOV  R6,#00H         ;??????
+012F 8699             24      ALOOP3:MOV  SBUF,@R0      ;????????
+0131 EE               25                MOV  A,R6           
+0132 26               26                ADD  A,@R0          ;???? 
+0133 FE               27                MOV  R6,A            ;?????
+0134 08               28                INC R0
+0135 3099FD           29                JNB  TI,$   
+0138 C299             30                CLR  TI
+013A DFF3             31                DJNZ  R7,ALOOP3    ;???????????
+                      32     
+013C 8E99             33                MOV  SBUF,R6       ;????? 
+013E 3099FD           34               JNB  TI,$
+0141 C299             35                CLR  TI
+                      36     
+0143 3098FD           37                JNB  RI,$            ;??2???????
+0146 C298             38                CLR  RI
+                      39     
+0148 E599             40                MOV  A,SBUF        ;2????,??A
+014A 70DD             41                JNZ   ALOOP2         ;2????“??”,?????  
+014C 75900F           42                        MOV P1,#0FH
+014F 80FE             43                        SJMP $
+                      44     END
+A51 MACRO ASSEMBLER  HOMEWORK7_2_TRANS                                                    04/13/2024 19:54:12 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ALOOP1 . . . . . .  C ADDR   0116H   A   
+ALOOP2 . . . . . .  C ADDR   0129H   A   
+ALOOP3 . . . . . .  C ADDR   012FH   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+START. . . . . . .  C ADDR   0100H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

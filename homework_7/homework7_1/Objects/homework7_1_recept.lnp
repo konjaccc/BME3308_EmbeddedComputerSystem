@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\homeworkl7_1_recept.obj" 
+TO ".\Objects\homework7_1_recept" 
+PRINT(".\Listings\homework7_1_recept.m51")

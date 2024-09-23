@@ -1,0 +1,127 @@
+A51 MACRO ASSEMBLER  HOMEWORK7_1_TRANS                                                    04/13/2024 13:21:26 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\homework7_1_trans.obj
+ASSEMBLER INVOKED BY: E:\S.W\Keil_v5\C51\BIN\A51.EXE homework7_1_trans.a51 SET(SMALL) DEBUG PRINT(.\Listings\homework7_1
+                      _trans.lst) OBJECT(.\Objects\homework7_1_trans.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 021000            2             LJMP MAIN
+1000                   3     ORG 1000H
+1000                   4     MAIN:
+1000 C2AF              5             CLR EA
+1002 758820            6             MOV TCON, #20H
+1005 758BFA            7             MOV TL1, #0FAH
+1008 758DFA            8             MOV TH1, #0FAH
+100B D28E              9             SETB TR1
+100D D2AC             10             SETB ES
+100F 758700           11         MOV  PCON,#00H       ;SET UART
+1012 759850           12         MOV  SCON,#50H
+1015 759000           13             MOV P1,#00H
+1018                  14             READ:
+                      15     
+1018 75A0FF           16         MOV P2, #0FFH            ;READ IN KEYBOARD
+101B C2A3             17             CLR P2.3
+101D 30A22F           18             JNB P2.2, NUM1
+1020 30A130           19             JNB P2.1, NUM2
+1023 30A031           20             JNB P2.0, NUM3
+1026 D2A3             21             SETB P2.3
+1028 C2A4             22             CLR P2.4
+102A 30A22E           23             JNB P2.2, NUM4
+102D 30A12F           24             JNB P2.1, NUM5
+1030 30A030           25             JNB P2.0, NUM6
+1033 D2A4             26             SETB P2.4
+1035 C2A5             27             CLR P2.5
+1037 30A22D           28             JNB P2.2, NUM7
+103A 30A12E           29             JNB P2.1, NUM8
+103D 30A02F           30             JNB P2.0, NUM9
+1040 D2A5             31             SETB P2.5
+1042 C2A6             32             CLR P2.6
+1044 30A104           33             JNB P2.1, NUM0
+1047 D2A6             34             SETB P2.6
+1049 80CD             35             SJMP READ
+104B                  36             NUM0:
+104B 743F             37             MOV A,#3FH
+104D 8024             38             SJMP SEND
+104F                  39             NUM1:
+104F 7406             40             MOV A,#06H
+1051 8020             41             SJMP SEND       
+1053                  42             NUM2:
+1053 745B             43             MOV A,#5BH
+1055 801C             44             SJMP SEND
+1057                  45             NUM3:
+1057 744F             46             MOV A,#4FH
+1059 8018             47             SJMP SEND
+105B                  48             NUM4:
+105B 7466             49             MOV A,#66H
+105D 8014             50             SJMP SEND
+105F                  51             NUM5:
+105F 746D             52             MOV A,#6DH
+1061 8010             53             SJMP SEND
+1063                  54             NUM6:
+1063 747D             55             MOV A,#7DH
+1065 800C             56             SJMP SEND
+1067                  57             NUM7:
+A51 MACRO ASSEMBLER  HOMEWORK7_1_TRANS                                                    04/13/2024 13:21:26 PAGE     2
+
+1067 7407             58             MOV A,#07H
+1069 8008             59             SJMP SEND
+106B                  60             NUM8:
+106B 747F             61             MOV A,#7FH
+106D 8004             62             SJMP SEND
+106F                  63             NUM9:
+106F 746F             64             MOV A,#6FH
+1071 8000             65             SJMP SEND
+1073                  66             SEND:
+                      67     
+1073 3080A2           68             JNB P0.0,READ
+1076 F599             69             MOV SBUF,A                      ;UART TRANS
+                      70             
+1078 3099FD           71         JNB  TI,$                   ;WAIT FOR TRANS
+107B C299             72         CLR  TI                             ;OPEN RE-TRANS
+107D 75900F           73             MOV P1,#0FH     
+1080 021018           74             LJMP READ
+                      75     END
+A51 MACRO ASSEMBLER  HOMEWORK7_1_TRANS                                                    04/13/2024 13:21:26 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ES . . . . . . . .  B ADDR   00A8H.4 A   
+MAIN . . . . . . .  C ADDR   1000H   A   
+NUM0 . . . . . . .  C ADDR   104BH   A   
+NUM1 . . . . . . .  C ADDR   104FH   A   
+NUM2 . . . . . . .  C ADDR   1053H   A   
+NUM3 . . . . . . .  C ADDR   1057H   A   
+NUM4 . . . . . . .  C ADDR   105BH   A   
+NUM5 . . . . . . .  C ADDR   105FH   A   
+NUM6 . . . . . . .  C ADDR   1063H   A   
+NUM7 . . . . . . .  C ADDR   1067H   A   
+NUM8 . . . . . . .  C ADDR   106BH   A   
+NUM9 . . . . . . .  C ADDR   106FH   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+READ . . . . . . .  C ADDR   1018H   A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SEND . . . . . . .  C ADDR   1073H   A   
+TCON . . . . . . .  D ADDR   0088H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

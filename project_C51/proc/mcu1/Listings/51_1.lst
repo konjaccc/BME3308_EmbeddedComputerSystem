@@ -1,0 +1,202 @@
+A51 MACRO ASSEMBLER  51_1                                                                 04/26/2024 20:09:27 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\51_1.obj
+ASSEMBLER INVOKED BY: E:\S.W\Keil_v5\C51\BIN\A51.EXE 51_1.a51 SET(SMALL) DEBUG PRINT(.\Listings\51_1.lst) OBJECT(.\Objec
+                      ts\51_1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG  0000H
+0000 020100            2             LJMP INIT
+000B                   3     ORG 000BH
+000B 0201CC            4             LJMP DVT0
+00A0                   5     ORG 00A0H
+00A0 00                6      COUNT_TIME: DB 0
+00A1 00                7     SUM_TIME: DB 0   
+0100                   8     ORG  0100H              
+0100                   9             INIT:
+0100 D2AF             10             SETB EA         
+0102 759001           11     MOV P1,#01H     
+0105 75814F           12             MOV SP,#4FH
+0108 758921           13             MOV  TMOD,#21H
+010B 758DFD           14         MOV  TH1,#0FDH
+010E 758BFD           15         MOV  TL1,#0FDH
+0111 758CD8           16             MOV TH0, #0D8H    
+0114 758AF0           17         MOV TL0, #0F0H
+0117 758700           18         MOV  PCON,#00H       
+011A D28E             19         SETB  TR1
+011C D2AC             20             SETB ES
+011E D28C             21         SETB TR0 
+0120 D2B9             22             SETB PT0
+0122 D2A9             23             SETB ET0
+0124 759850           24         MOV  SCON,#50H      
+0127 7412             25             MOV A, #12H
+0129 C0E0             26             PUSH ACC
+012B 7411             27             MOV A,#11H
+012D C0E0             28             PUSH ACC
+012F                  29     START:
+012F 900000           30      MOV  DPTR, #0000H 
+0132 F0               31      MOVX @DPTR, A
+0133 120191           32      LCALL DELAY1
+0136 E0               33      MOVX A, @DPTR
+0137 C0E0             34      PUSH ACC
+0139 9000A0           35      MOV DPTR, #COUNT_TIME
+013C E0               36      MOVX  A,@DPTR
+                      37     
+013D F5F0             38      MOV B,A
+013F 7400             39      MOV A,#00H
+0141 F0               40      MOVX  @DPTR,A
+0142 9000A1           41      MOV DPTR, #SUM_TIME
+0145 E0               42      MOVX A, @DPTR
+                      43      ;ADD A, B
+                      44     
+0146 9000A1           45      MOV DPTR, #SUM_TIME
+0149 F0               46      MOVX @DPTR,A
+014A D0E0             47      POP ACC
+014C 7D08             48             MOV R5,#8
+014E 7E00             49             MOV R6,#00H
+0150                  50             LOOP1:
+0150 75F002           51                     MOV B,#2
+0153 84               52                     DIV AB
+0154 C0E0             53                     PUSH ACC
+0156 EE               54                     MOV A,R6
+0157 C0F0             55                     PUSH B
+0159 75F002           56                     MOV B,#2
+015C A4               57                     MUL AB
+A51 MACRO ASSEMBLER  51_1                                                                 04/26/2024 20:09:27 PAGE     2
+
+015D D0F0             58                     POP B
+015F 25F0             59                     ADD A,B
+0161 FE               60                     MOV R6, A
+0162 D0E0             61                     POP ACC
+0164 DDEA             62             DJNZ R5, LOOP1
+0166 D0F0             63             POP B
+0168 D0E0             64             POP ACC
+                      65     
+016A B5F003           66             CJNE A, B, NEXTSTEP
+016D 020189           67             LJMP READOVER1
+0170                  68             NEXTSTEP:
+0170 5017             69             JNC READOVER1
+0172 C2D7             70             CLR CY
+0174 EE               71             MOV A, R6
+0175 C0F0             72             PUSH B
+0177 C0E0             73             PUSH ACC
+                      74     
+0179 B5F003           75             CJNE A,B, CHECK
+017C 12019A           76     LCALL CALC_RATE
+017F                  77             CHECK:
+017F 500D             78             JNC READOVER
+0181 C2D7             79             CLR CY
+0183 12019A           80             LCALL CALC_RATE
+0186 02018E           81             LJMP READOVER
+0189                  82             READOVER1:
+0189 C0F0             83             PUSH B
+018B EE               84             MOV A, R6
+018C C0E0             85             PUSH ACC
+018E                  86             READOVER:
+018E 02012F           87             LJMP START      
+0191                  88     DELAY1:
+0191 7E4F             89             MOV R6,#04FH
+0193                  90     DELAY:    
+0193 7DFF             91             MOV  R5,#0FFH
+0195                  92     DELAYY:
+0195 DDFE             93             DJNZ R5,DELAYY
+0197 DEFA             94     DJNZ R6,DELAY
+0199 22               95         RET 
+019A                  96     CALC_RATE:
+019A B290             97      CPL P1.0
+019C 9000A1           98             MOV DPTR, #SUM_TIME
+019F 7400             99             MOV A,#00H
+01A1 F0              100             MOVX @DPTR,A
+01A2 E0              101             MOVX A, @DPTR
+                     102     
+01A3 F599            103             MOV SBUF, A
+01A5 30B5FD          104             JNB T1, $
+01A8 C299            105             CLR TI
+01AA F5F0            106             MOV B, A
+01AC 74FF            107             MOV A, #0FFH
+01AE 84              108             DIV AB
+01AF C0E0            109             PUSH ACC
+01B1 F5F0            110             MOV B, A
+01B3 75F003          111             MOV B,#03H
+01B6 A4              112             MUL AB
+01B7 75F0EB          113             MOV B, #0EBH
+01BA 25F0            114             ADD A, B
+01BC C0E0            115             PUSH ACC
+01BE 89F0            116             MOV B, R1
+                     117     
+01C0 D0E0            118             POP ACC
+01C2 84              119             DIV AB
+01C3 EF              120             MOV A, R7
+01C4 D0E0            121             POP ACC
+01C6 75F003          122             MOV B,#03H
+01C9 A4              123             MUL AB
+A51 MACRO ASSEMBLER  51_1                                                                 04/26/2024 20:09:27 PAGE     3
+
+01CA 2F              124             ADD A, R7
+                     125     
+                     126             
+01CB 22              127             RET
+01CC                 128     DVT0:
+                     129      
+01CC 758CD8          130         MOV TH0, #0D8H    
+01CF 758AF0          131         MOV TL0, #0F0H
+01D2 9000A0          132      MOV DPTR, #COUNT_TIME
+01D5 E0              133      MOVX A, @DPTR
+01D6 75F001          134      MOV B,#01H
+01D9 25F0            135      ADD A,B
+01DB 9000A0          136      MOV DPTR, #COUNT_TIME
+01DE F0              137      MOVX @DPTR, A
+01DF 32              138      RETI
+                     139     END
+A51 MACRO ASSEMBLER  51_1                                                                 04/26/2024 20:09:27 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+CALC_RATE. . . . .  C ADDR   019AH   A   
+CHECK. . . . . . .  C ADDR   017FH   A   
+COUNT_TIME . . . .  C ADDR   00A0H   A   
+CY . . . . . . . .  B ADDR   00D0H.7 A   
+DELAY. . . . . . .  C ADDR   0193H   A   
+DELAY1 . . . . . .  C ADDR   0191H   A   
+DELAYY . . . . . .  C ADDR   0195H   A   
+DVT0 . . . . . . .  C ADDR   01CCH   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ES . . . . . . . .  B ADDR   00A8H.4 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+INIT . . . . . . .  C ADDR   0100H   A   
+LOOP1. . . . . . .  C ADDR   0150H   A   
+NEXTSTEP . . . . .  C ADDR   0170H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PCON . . . . . . .  D ADDR   0087H   A   
+PT0. . . . . . . .  B ADDR   00B8H.1 A   
+READOVER . . . . .  C ADDR   018EH   A   
+READOVER1. . . . .  C ADDR   0189H   A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+START. . . . . . .  C ADDR   012FH   A   
+SUM_TIME . . . . .  C ADDR   00A1H   A   
+T1 . . . . . . . .  B ADDR   00B0H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
